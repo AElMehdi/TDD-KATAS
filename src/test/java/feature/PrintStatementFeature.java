@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import com.aelmehdi.katas.Account;
 import com.aelmehdi.katas.Console;
+import com.aelmehdi.katas.StatementPrinter;
+import com.aelmehdi.katas.TransactionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PrintStatementFeature {
@@ -17,10 +19,12 @@ public class PrintStatementFeature {
 
    @Mock Console console;
    private Account account;
+   private StatementPrinter statementPrinter;
 
    @Before
-   public void setUp() {
-      account = new Account();
+   public void initialize() {
+      TransactionRepository transactionRepository = new TransactionRepository();
+      account = new Account(transactionRepository, statementPrinter);
    }
 
    @Test
