@@ -9,6 +9,7 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import com.aelmehdi.katas.Account;
+import com.aelmehdi.katas.Clock;
 import com.aelmehdi.katas.Console;
 import com.aelmehdi.katas.StatementPrinter;
 import com.aelmehdi.katas.TransactionRepository;
@@ -17,13 +18,16 @@ import com.aelmehdi.katas.TransactionRepository;
 public class PrintStatementFeature {
 
 
-   @Mock Console console;
+   @Mock
+   Console console;
+   @Mock
+   private Clock clock;
    private Account account;
-   private StatementPrinter statementPrinter;
 
    @Before
    public void initialize() {
-      TransactionRepository transactionRepository = new TransactionRepository();
+      TransactionRepository transactionRepository = new TransactionRepository(clock);
+      StatementPrinter statementPrinter = new StatementPrinter();
       account = new Account(transactionRepository, statementPrinter);
    }
 

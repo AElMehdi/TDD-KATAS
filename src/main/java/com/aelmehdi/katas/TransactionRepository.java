@@ -1,17 +1,29 @@
 package com.aelmehdi.katas;
 
+import static java.util.Collections.unmodifiableList;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionRepository {
+   private Clock clock;
+   private List<Transaction> transactions = new ArrayList<Transaction>();
+
+   public TransactionRepository(Clock clock) {
+      this.clock = clock;
+   }
+
    public void addDeposit(int amount) {
-      new UnsupportedOperationException();
+      Transaction deposit = new Transaction(clock.todayAsString(), amount);
+      transactions.add(deposit);
    }
 
    public void addWithdrawal(int amount) {
-      new UnsupportedOperationException();
+      Transaction withdraw = new Transaction(clock.todayAsString(), -amount);
+      transactions.add(withdraw);
    }
 
    public List<Transaction> allTransactions() {
-      throw new UnsupportedOperationException();
+      return unmodifiableList(transactions);
    }
 }
