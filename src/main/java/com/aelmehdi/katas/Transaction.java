@@ -26,4 +26,12 @@ public class Transaction {
       result = 31 * result + amount;
       return result;
    }
+
+   public String date() {
+      return date;
+   }
+
+   public int amount() {
+      return amount;
+   }
 }
